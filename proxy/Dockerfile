@@ -18,6 +18,6 @@ COPY . /var/backend/proxy
 
 WORKDIR /var/backend/proxy
 
-CMD [ "npm", "start" ]
-
 EXPOSE 3002
+
+CMD [ "npm", "start" ]

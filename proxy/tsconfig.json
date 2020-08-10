@@ -10,7 +10,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "esModuleInterop": true,
     "typeRoots": [
       "node_modules/@types"

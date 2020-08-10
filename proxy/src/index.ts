@@ -1,27 +1,23 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import pino from 'pino';
 
-const port = 3002;
-const app = express();
+import { settings } from './settings';
+import routes from './routes';
+// import resolvers from './resolvers/rest';
+import AppServer from './service';
 
-// const db = mongoose.connection;
-// db.on('error', console.error);
-// db.once('open', function() {console.log("DB connected")});
-// mongoose.connect('mongodb://localhost:27017/chat_demo');
+const logger = pino();
 
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({ extended: true }));
+try {
+    const appSrv = new AppServer(settings, logger);
+    logger.info('Starting HTTP server');
 
-app.get('/', (_req, res) => {
-    res.send('hello from Proxy <br/>' + new Date());
-});
+    // Create Koa application server (app)
+    appSrv.init();
 
-app.get('/asd', (_req, res) => {
-    res.send('Proxy asd');
-});
+    // Calling hook for setting rest routers
+    appSrv.withRest(routes);
 
-
-app.listen(port, 'localhost', function onStart(_err) {
-    console.log(`==> 🌎 Listening on port %s. Open up http://127.0.0.1:${port} in your browser.`);
-});
+    appSrv.listen();
+} catch (e) {
+    logger.error(e, 'An error occurred while initializing application.');
+}
