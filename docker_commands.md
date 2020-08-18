@@ -13,7 +13,7 @@ docker build -t <service name>_blueprint:<version> <path to directory with docke
 docker build -t file-manager-blueprint:v2 .
 docker build -t proxy_blueprint:v1 .
 
-docker run -p 3001:3001 file-manager-blueprint:v2
+docker run -p 3333:3333 file-manager-blueprint:v2
 
 docker images 
 
@@ -26,3 +26,9 @@ kubectl
 -deployment 
 
 kubectl apply -f deployment.yaml
+
+use/ un use kubernetes as place for images 
+
+minikube docker-env -> ....
+
+eval $(minikube docker-env -u)

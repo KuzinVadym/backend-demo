@@ -3,6 +3,7 @@ import * as bodyParser from "body-parser";
 
 import {Logger} from "pino";
 import ISettings from "./interfaces/ISettings";
+import routes from './routes'
 
 export default class AppServer {
     private app: Express;
@@ -25,7 +26,7 @@ export default class AppServer {
     }
 
     // listen server
-    public withRest(routes: Router): void {
+    public withRest(_routes: Router): void {
         this.app.use('/api/v1', routes);
     }
 
@@ -33,7 +34,7 @@ export default class AppServer {
     public listen(): void {
         const port = this.settings.port;
         this.logger.info(`Application running on port: ${this.settings.port}`);
-        this.app.listen(this.settings.port, function onStart(_err) {
+        this.app.listen(this.settings.port, (_err) => {
             console.log(`==> 🌎 Listening on port %s. Open up http://127.0.0.1:${port} in your browser.`);
         });
     }
