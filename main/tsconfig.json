@@ -3,7 +3,10 @@
     "outDir": "./dist",
     "rootDir": "./",
     "target": "es2017",
-    "lib": [ "es2017" ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "module": "commonjs",
     "sourceMap": true,
     "noUnusedLocals": false,

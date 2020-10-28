@@ -6,7 +6,7 @@ const router = express.Router();
 router.use('/users', users);
 
 router.get('/', function(_req, res, _next) {
-    console.log("Get From Proxy");
+    console.log("Get From Proxy!!");
     let data = {
         service: "Proxy",
         call: "Get",

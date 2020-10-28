@@ -33,7 +33,7 @@ export default class AppServer {
     public listen(): void {
         const port = this.settings.port;
         this.logger.info(`Application running on port: ${this.settings.port}`);
-        this.app.listen(this.settings.port, function onStart(_err) {
+        this.app.listen(this.settings.port, () => {
             console.log(`==> 🌎 Listening on port %s. Open up http://127.0.0.1:${port} in your browser.`);
         });
     }

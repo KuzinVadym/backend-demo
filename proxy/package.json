@@ -1,11 +1,12 @@
 {
-  "name": "file_manager",
+  "name": "proxy",
   "version": "0.1.0",
   "private": true,
-  "description": "File manager microservice",
+  "description": "Proxy microservice",
   "scripts": {
-    "start": "node -r ts-node/register ./src/index.ts",
-    "start:watch": "nodemon",
+    "develop": "node -r ts-node/register ./src/index.ts",
+    "develop:watch": "nodemon",
+    "start": "node ./index.js",
     "format": "prettier --write \"**/*.ts\"",
     "build": "tsc",
     "tslint": "tslint --project ./"
@@ -23,7 +24,6 @@
     "express": "^4.17.1",
     "formidable": "^1.2.2",
     "ioredis": "^4.17.1",
-    "jimp": "^0.12.1",
     "node-stream-zip": "^1.11.1",
     "passport-local": "^1.0.0",
     "pino": "^6.3.0",

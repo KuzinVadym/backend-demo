@@ -1,18 +1,29 @@
-import express, {Express, Router} from "express";
-import * as bodyParser from "body-parser";
+import express, { Express } from 'express';
+import * as bodyParser from 'body-parser';
 
-import {Logger} from "pino";
+import { Logger } from 'pino';
 import ISettings from "./interfaces/ISettings";
-import routes from './routes'
+import { createGRPCClient } from "./utils";
+import { IAppServer, IMainRoutes } from "./interfaces/IAppServer";
+import { IState } from "./interfaces/IState";
 
-export default class AppServer {
+export default class AppServer implements IAppServer{
     private app: Express;
+    private grpc;
     private readonly logger: Logger;
     private readonly settings: ISettings;
 
     constructor(settings: ISettings, logger: Logger) {
         this.settings = settings;
         this.logger = logger;
+        this.grpc = {};
+    }
+
+    public getState(): IState {
+        return {
+            logger: this.logger,
+            grpc: this.grpc
+        };
     }
 
     // create Koa application server
@@ -25,9 +36,20 @@ export default class AppServer {
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 
+    public withGRPC(): void {
+        this.grpc.clients = this.settings.grpc.clients.reduce((result, connection, _index) => {
+            result[connection] = createGRPCClient(connection);
+            return result
+        }, {});
+    }
+
     // listen server
-    public withRest(_routes: Router): void {
-        this.app.use('/api/v1', routes);
+    public withRest(mainRoutes: IMainRoutes): void {
+        const getState = () => {
+            return this.getState();
+        };
+        const mainRouter = mainRoutes(getState);
+        this.app.use('/api/v1', mainRouter);
     }
 
     // listen server
