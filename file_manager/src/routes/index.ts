@@ -1,9 +1,8 @@
 import express from "express";
 import users from "./users";
 
-const router = express.Router();
 
-router.use('/users', users);
+const router = express.Router();
 
 router.get('/', function(req, res, next) {
     console.log("Get From File Manager");
@@ -14,5 +13,7 @@ router.get('/', function(req, res, next) {
     };
     res.json(data);
 });
+
+router.use('/users', users);
 
 export default router;

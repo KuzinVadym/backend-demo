@@ -18,6 +18,10 @@ COPY . /var/backend/proxy
 
 WORKDIR /var/backend/proxy
 
-CMD [ "npm", "start" ]
+RUN npm run build
+
+RUN cp -r ./dist/src/* .
+
+CMD ["npm", "run", "start"]
 
 EXPOSE 3002

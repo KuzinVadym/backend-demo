@@ -5,9 +5,10 @@
   "description": "File manager microservice",
   "scripts": {
     "develop": "node -r ts-node/register ./src/index.ts",
+    "develop:watch": "nodemon",
+    "start": "node ./index.js",
     "format": "prettier --write \"**/*.ts\"",
     "build": "tsc",
-    "start": "node ./index.js",
     "tslint": "tslint --project ./"
   },
   "license": "Commercial",

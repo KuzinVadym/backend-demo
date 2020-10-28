@@ -14,6 +14,6 @@ RUN npm run build
 
 RUN cp -r ./dist/src/* .
 
-EXPOSE 3333
-
 CMD ["npm", "run", "start"]
+
+EXPOSE 3333
