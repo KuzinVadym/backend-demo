@@ -1,19 +1,10 @@
-import express from "express";
-import users from "./users";
+import express, {Router} from "express";
+import { usersRoutes } from './users';
+import { IRouterBuilder } from "../interfaces/structural";
 
+export const mainRoutes: IRouterBuilder = (getState): Router => {
+    const router = express.Router();
+    router.use(`/reports`, usersRoutes(getState));
 
-const router = express.Router();
-
-router.get('/', function(req, res, next) {
-    console.log("Get From File Manager");
-    let data = {
-        service: "File Manager",
-        call: "Get",
-        time: new Date().getMilliseconds()
-    };
-    res.json(data);
-});
-
-router.use('/users', users);
-
-export default router;
+    return router;
+};

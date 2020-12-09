@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 
 import {Logger} from "pino";
 import ISettings from "./interfaces/ISettings";
-import routes from './routes'
+import { IState, IMainRoutes } from "./interfaces/structural";
 
 export default class AppServer {
     private app: Express;
@@ -13,6 +13,12 @@ export default class AppServer {
     constructor(settings: ISettings, logger: Logger) {
         this.settings = settings;
         this.logger = logger;
+    }
+
+    public getState(): IState {
+        return {
+            logger: this.logger
+        };
     }
 
     // create Koa application server
@@ -26,8 +32,12 @@ export default class AppServer {
     }
 
     // listen server
-    public withRest(_routes: Router): void {
-        this.app.use('/api/v1', routes);
+    public withRest(mainRoutes: IMainRoutes): void {
+        const getState = () => {
+            return this.getState();
+        };
+        const mainRouter = mainRoutes(getState);
+        this.app.use('/api', mainRouter);
     }
 
     // listen server
