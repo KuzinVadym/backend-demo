@@ -1,7 +1,7 @@
 import ISettings from "./interfaces/ISettings";
 
 export const settings: ISettings = {
-    port: 3001,
+    port: process.env.PORT || "3001",
     grpc: {
         clients: [],
         servers: ['Todo']

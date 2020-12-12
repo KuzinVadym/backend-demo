@@ -1,27 +1,16 @@
-FROM node:12-alpine as main_prepare
+FROM node:12.20.0-alpine
 
-RUN set -ex && \
-    mkdir -p /var/backend/main
+WORKDIR  /usr/src/app
+COPY package*.json /usr/src/app/
+RUN yarn install
+COPY . .
+RUN yarn run build
 
-WORKDIR /var/backend/main
+ARG PORT=3001
+ENV PORT=${PORT}
 
-COPY package.json yarn.lock ./
+EXPOSE $PORT
 
-RUN apk add --no-cache bash && \
-    npm install
+USER node
 
-FROM node:12-alpine
-
-COPY --from=main_prepare /var/backend/main /var/backend/main
-
-COPY . /var/backend/main
-
-WORKDIR /var/backend/main
-
-RUN npm run build
-
-RUN cp -r ./dist/src/* .
-
-CMD ["npm", "run", "start"]
-
-EXPOSE 3002
+CMD ["node", "dist/src/index.js"]

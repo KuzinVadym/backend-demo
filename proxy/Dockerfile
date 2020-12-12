@@ -1,27 +1,16 @@
-FROM node:12-alpine as proxy_prepare
+FROM node:12.20.0-alpine
 
-RUN set -ex && \
-    mkdir -p /var/backend/proxy
+WORKDIR  /usr/src/app
+COPY package*.json /usr/src/app/
+RUN yarn install
+COPY . .
+RUN yarn run build
 
-WORKDIR /var/backend/proxy
+ARG PORT=3002
+ENV PORT=${PORT}
 
-COPY package.json yarn.lock ./
+EXPOSE $PORT
 
-RUN apk add --no-cache bash && \
-    npm install
+USER node
 
-FROM node:12-alpine
-
-COPY --from=proxy_prepare /var/backend/proxy /var/backend/proxy
-
-COPY . /var/backend/proxy
-
-WORKDIR /var/backend/proxy
-
-RUN npm run build
-
-RUN cp -r ./dist/src/* .
-
-CMD ["npm", "run", "start"]
-
-EXPOSE 3002
+CMD ["node", "dist/src/index.js"]
