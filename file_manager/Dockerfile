@@ -1,19 +1,16 @@
-FROM node:12
+FROM node:12.20.0-alpine
 
-RUN mkdir -p /usr/src/app
-
-WORKDIR /usr/src/app
-
-COPY package.json .
-
-RUN npm install
-
+WORKDIR  /usr/src/app
+COPY package*.json /usr/src/app/
+RUN yarn install
 COPY . .
+RUN yarn run build
 
-RUN npm run build
+ARG PORT=3333
+ENV PORT=${PORT}
 
-RUN cp -r ./dist/src/* .
+EXPOSE $PORT
 
-CMD ["npm", "run", "start"]
+USER node
 
-EXPOSE 3333
+CMD ["node", "dist/src/index.js"]

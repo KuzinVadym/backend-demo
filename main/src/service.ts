@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 
 import {Logger} from 'pino';
 import ISettings from "./interfaces/ISettings";
-import {createGRPCClient, createGRPCServer} from "./utils";
+// import {createGRPCClient, createGRPCServer} from "./utils";
 import {IAppServer, IMainRoutes} from "./interfaces/IAppServer";
 import {IState} from "./interfaces/IState";
 
@@ -34,15 +34,6 @@ export default class AppServer implements IAppServer{
         this.app.use(bodyParser.json({limit: '50mb'}));
         this.app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
         this.app.use(bodyParser.urlencoded({ extended: true }));
-    }
-
-    public withGRPC(): void {
-        this.grpc.clients = this.settings.grpc.clients.map(connection => {
-            return createGRPCClient(connection);
-        });
-        this.grpc.servers = this.settings.grpc.servers.map(connection => {
-           return createGRPCServer(connection);
-        });
     }
 
     // listen server

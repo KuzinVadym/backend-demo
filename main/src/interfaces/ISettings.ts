@@ -5,6 +5,6 @@ export interface IGRPC {
 }
 
 export default interface ISettings {
-    port?: number;
+    port?: string;
     grpc?: IGRPC
 }

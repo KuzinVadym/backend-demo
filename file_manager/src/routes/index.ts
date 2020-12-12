@@ -4,7 +4,7 @@ import { IRouterBuilder } from "../interfaces/structural";
 
 export const mainRoutes: IRouterBuilder = (getState): Router => {
     const router = express.Router();
-    router.use(`/reports`, usersRoutes(getState));
+    router.use(`/users`, usersRoutes(getState));
 
     return router;
 };

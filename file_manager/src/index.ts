@@ -1,7 +1,7 @@
 import pino from 'pino';
 
 import { settings } from './settings';
-import routes from './routes';
+import { mainRoutes } from './routes';
 // import resolvers from './resolvers/rest';
 import AppServer from './service';
 
@@ -15,7 +15,7 @@ try {
     appSrv.init();
 
     // Calling hook for setting rest routers
-    appSrv.withRest(routes);
+    appSrv.withRest(mainRoutes);
 
     appSrv.listen();
 } catch (e) {

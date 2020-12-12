@@ -14,9 +14,6 @@ try {
     // Create application server (app)
     appSrv.init();
 
-    // Create GRPC connection (app)
-    appSrv.withGRPC();
-
     // Calling hook for setting rest routers
     appSrv.withRest(mainRoutes);
 
