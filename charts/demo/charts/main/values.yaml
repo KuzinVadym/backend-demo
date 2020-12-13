@@ -1,0 +1,93 @@
+replicaCount: 2
+
+image:
+  repository: kuzinvadym/backend_demo_main
+  pullPolicy: IfNotPresent
+  tag: sha-1c2bbe5
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+application:
+  env:
+    NODE_ENV: production
+    PORT: "3001"
+
+service:
+  enabled: true
+  type: ClusterIP
+  internalPort: 3001
+  externalPort: 3001
+
+livenessProbe:
+  path: "/api//health"
+  initialDelaySeconds: 15
+  timeoutSeconds: 15
+  scheme: "HTTP"
+  probeType: "httpGet"
+readinessProbe:
+  path: "/api/health"
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  scheme: "HTTP"
+  probeType: "httpGet"
+
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "false"
+  hosts:
+    - host: acceleration.local
+      paths: /calc
+  tls:
+    enabled: false
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# podDisruptionBudget: {}
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+prometheus:
+  metrics: false

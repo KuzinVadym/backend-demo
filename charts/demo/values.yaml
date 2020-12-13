@@ -1,0 +1,45 @@
+proxy:
+  nameOverride: proxy
+  fullnameOverride: proxy
+  replicaCount: 2
+  image:
+    repository: kuzinvadym/backend_demo_proxy
+    pullPolicy: IfNotPresent
+    tag: sha-3b1284b
+  service:
+    url: http://backend-demo.1mr.me/
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "false"
+      kubernetes.io/hide-headers: "x-powered-by"
+    hosts:
+      - host: backend-demo.1mr.me
+    path: "/"
+    tls:
+      enabled: false
+  application:  
+    env:
+      NODE_ENV: production
+      PORT: "3002"
+      MAIN_URL: "http://main:3001/"
+      FM_URL: "http://filemanager:3003/"
+
+main:
+  nameOverride: main
+  fullnameOverride: main
+  replicaCount: 2
+  image:
+    repository: kuzinvadym/backend_demo_main
+    pullPolicy: IfNotPresent
+    tag: sha-3b1284b
+
+filemanager:
+  nameOverride: filemanager
+  fullnameOverride: filemanager
+  replicaCount: 2
+  image:
+    repository: kuzinvadym/backend_demo_filemanager
+    pullPolicy: IfNotPresent
+    tag: sha-3b1284b
