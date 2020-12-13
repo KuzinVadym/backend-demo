@@ -17,6 +17,8 @@ try {
     // Calling hook for setting rest routers
     appSrv.withRest(mainRoutes);
 
+    appSrv.withGRPC();
+
     appSrv.listen();
 } catch (e) {
     logger.error(e, 'An error occurred while initializing application.');

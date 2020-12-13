@@ -5,6 +5,7 @@ COPY package*.json /usr/src/app/
 RUN yarn install
 COPY . .
 RUN yarn run build
+RUN yarn run postbuild
 
 ARG PORT=3001
 ENV PORT=${PORT}

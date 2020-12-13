@@ -2,7 +2,6 @@ import pino from 'pino';
 
 import { settings } from './settings';
 import { mainRoutes } from './routes';
-// import resolvers from './resolvers/rest';
 import AppServer from './service';
 
 const logger = pino();

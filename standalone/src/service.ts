@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 
 import { Logger } from 'pino';
 import ISettings from "./interfaces/ISettings";
-import { createGRPCClient } from "./utils";
+import { createGRPCClient } from "./grpc";
 import { IAppServer, IMainRoutes } from "./interfaces/IAppServer";
 import { IState } from "./interfaces/IState";
 

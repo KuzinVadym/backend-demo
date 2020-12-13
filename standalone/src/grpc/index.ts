@@ -2,7 +2,7 @@ import * as protoLoader from "@grpc/proto-loader";
 import * as grpc from "@grpc/grpc-js";
 
 export function createGRPCClient(payload: string) {
-    const PROTO_PATH = `${__dirname}/../grpc/${payload.toLowerCase()}.proto`;
+    const PROTO_PATH = `${__dirname}/proto/${payload.toLowerCase()}.proto`;
 
     const packageDefinition = protoLoader.loadSync(PROTO_PATH, {});
     const grpcObject = grpc.loadPackageDefinition(packageDefinition);
