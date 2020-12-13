@@ -6,18 +6,17 @@ import {usersRoutes} from './users';
 
 export const mainRoutes: IRouterBuilder = (getState): Router => {
     const router = express.Router();
-    router.use(`/users`, usersRoutes(getState));
 
-    router.get('/', function(_req, res, _next) {
-        console.log("Get From Main!!");
+    router.get('/health', function(_req, res, _next) {
         let data = {
-            service: "Standalone",
+            service: "Main",
             call: "Get",
             time: new Date().getMilliseconds()
         };
-        res.json(data);
+        res.status(200).json(data);
     });
 
+        router.use(`/users`, usersRoutes(getState));
     return router;
 };
 
