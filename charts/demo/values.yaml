@@ -7,7 +7,7 @@ proxy:
     pullPolicy: IfNotPresent
     tag: sha-3b1284b
   service:
-    url: http://backend-demo.1mr.me/
+    url: http://backend-demo.local/
   ingress:
     enabled: true
     annotations:
@@ -15,14 +15,14 @@ proxy:
       kubernetes.io/tls-acme: "false"
       kubernetes.io/hide-headers: "x-powered-by"
     hosts:
-      - host: backend-demo.1mr.me
+      - host: backend-demo.local
     path: "/"
     tls:
       enabled: false
   application:  
     env:
       NODE_ENV: production
-      PORT: "3002"
+      PORT: "3000"
       MAIN_URL: "http://main:3001/"
       FM_URL: "http://filemanager:3003/"
 

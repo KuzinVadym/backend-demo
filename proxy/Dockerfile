@@ -6,7 +6,7 @@ RUN yarn install
 COPY . .
 RUN yarn run build
 
-ARG PORT=3002
+ARG PORT=3000
 ENV PORT=${PORT}
 
 EXPOSE $PORT

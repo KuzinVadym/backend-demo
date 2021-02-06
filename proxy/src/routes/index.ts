@@ -3,7 +3,7 @@ import users from "./users";
 
 const router = express.Router();
 
-router.use('/users', users);
+router.use('/payments', users);
 
 router.get('/health', function(req, res, next) {
     let data = {

@@ -4,7 +4,7 @@
   "private": true,
   "description": "File manager microservice",
   "scripts": {
-    "dev": "PORT=3333 node -r ts-node/register ./src/index.ts",
+    "dev": "PORT=3003 node -r ts-node/register ./src/index.ts",
     "dev:watch": "nodemon",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.ts\"",
