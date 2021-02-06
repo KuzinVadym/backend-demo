@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./",
+    "target": "es2017",
+    "lib": [ "es2017" ],
+    "module": "commonjs",
+    "sourceMap": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/**.json",
+    "src/**/**.ts",
+    "test/**/**.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".idea"
+  ]
+}

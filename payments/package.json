@@ -1,10 +1,10 @@
 {
-  "name": "proxy",
+  "name": "payments",
   "version": "0.1.0",
   "private": true,
-  "description": "Proxy microservice",
+  "description": "Payments microservice",
   "scripts": {
-    "dev": "PORT=3000 node -r ts-node/register ./src/index.ts",
+    "dev": "PORT=3004 node -r ts-node/register ./src/index.ts",
     "dev:watch": "nodemon",
     "start": "node ./index.js",
     "format": "prettier --write \"**/*.ts\"",
@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "formidable": "^1.2.2",
     "ioredis": "^4.17.1",
+    "jimp": "^0.12.1",
     "node-stream-zip": "^1.11.1",
     "passport-local": "^1.0.0",
     "pino": "^6.3.0",

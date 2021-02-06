@@ -4,5 +4,5 @@ import ISettings from "./interfaces/ISettings";
 dotenv.config();
 
 export const settings: ISettings = {
-    port: process.env.PORT || "3333"
+    port: process.env.PORT || "3003"
 };

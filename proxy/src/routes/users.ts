@@ -4,7 +4,7 @@ const router = express.Router();
 const chatdata = require('./chatdata');
 
 router.get('/', function(req, res, next) {
-  console.log("Get users list");
+  console.log("Get payments list");
   let users = chatdata.reduce((result, chat, _index) => {
     let contact = (chat.requested_by == 'mike@example.com' && chat.transcript && chat.transcript.filter(item => item.id).length > 0) ? chat.transcript.filter(item => item.id)[0].id : null;
     if (contact && contact != 'unknown' && result.indexOf(contact) < 0) {

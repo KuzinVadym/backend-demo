@@ -6,7 +6,7 @@ export const usersRoutes: IRouterBuilder = (_getState): Router => {
   const router = express.Router();
 
   router.get('/', function(req, res, _next) {
-    console.log("Get users list");
+    console.log("Get payments list");
     res.json(true);
   });
 
